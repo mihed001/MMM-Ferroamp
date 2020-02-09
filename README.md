@@ -6,7 +6,7 @@ A Solar Module for MagicMirror2 designed to integrate with a Ferroamp System
 
 ## Installation
   1. Clone repo into MagicMirror/modules directory
-  	git clone https://github.com/mihed001/MMM-Ferroamp
+	git clone https://github.com/mihed001/MMM-Ferroamp
 	cd MMM-Ferroamp
 	npm install
   2. Create an entry in 'config/config.js' with your API Key, SiteID and any config options. 
