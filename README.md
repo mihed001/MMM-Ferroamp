@@ -1,4 +1,4 @@
-# MMM-SolarEdge
+# MMM-Ferroamp
 A Solar Module for MagicMirror2 designed to integrate with a Ferroamp System
 
 ## Dependencies
