@@ -7,7 +7,7 @@
 Module.register("MMM-Ferroamp",{
     // Default module config.
     defaults: {
-        url: "https://monitoringapi.solaredge.com/site/",
+        url: "https://professional.ferroamp.com/",
         apiKey: "", //Enter API key in config.js not here
         siteId: "12345", //Sample site
         refInterval: 1000 * 60 * 5, //5 minutes
@@ -53,14 +53,14 @@ Module.register("MMM-Ferroamp",{
     getSolarData: function() {
         Log.info("SolarApp: getting data");
 
-        this.sendSocketNotification("GET_SOLAR", {
+        this.sendSocketNotification("GET_FERROAMP", {
             config: this.config
           });
     },
 
     //Handle node helper response
     socketNotificationReceived: function(notification, payload) {
-    if (notification === "SOLAR_DATA") {
+    if (notification === "FERROAMP_DATA") {
 	    var currentPower = payload.overview.currentPower.power;
 	    if (currentPower > 1000) {
                this.results[0] = (currentPower / 1000).toFixed(2) + " kW";
