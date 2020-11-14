@@ -7,7 +7,7 @@
 Module.register("MMM-Ferroamp",{
     // Default module config.
     defaults: {
-        url: "https://professional.ferroamp.com/",
+        url: "https://portal.ferroamp.com/",
         apiKey: "", //Enter API key in config.js not here
         siteId: "12345", //Sample site
         refInterval: 1000 * 60 * 5, //5 minutes
@@ -19,14 +19,14 @@ Module.register("MMM-Ferroamp",{
         Log.info("Starting module: " + this.name);
 
 		if (config.language == 'sv') {
-			this.titles = ["Aktuell effekt:", "Energi idag:", "Energi denna månad:", "Energi detta år:", "Energi från start:"];
+			this.titles = ["Aktuell effekt:", "Energi idag:", "Energi från start:"];
 		}
 		else {
-			this.titles = ["Current Power:", "Daily Energy:", "Last Month:", "Last Year:", "Lifetime Energy:"];
+			this.titles = ["Current Power:", "Daily Energy:", "Lifetime Energy:"];
 		}
 
-		this.suffixes = ["Watt", "kWh", "kWh", "kWh", "MWh"];
-		this.results = ["Loading", "Loading", "Loading", "Loading", "Loading"];
+		this.suffixes = ["Watt", "kWh", "MWh"];
+		this.results = ["Loading", "Loading", "Loading"];
         this.loaded = false;
         this.getSolarData();
 
@@ -61,16 +61,14 @@ Module.register("MMM-Ferroamp",{
     //Handle node helper response
     socketNotificationReceived: function(notification, payload) {
     if (notification === "FERROAMP_DATA") {
-	    var currentPower = payload.overview.currentPower.power;
+	    var currentPower = payload.data.pvp.val;
 	    if (currentPower > 1000) {
                this.results[0] = (currentPower / 1000).toFixed(2) + " kW";
             } else {
                this.results[0] = currentPower + " Watt";
             }
-            this.results[1] = (payload.overview.lastDayData.energy / 1000).toFixed(2) + " kWh";
-            this.results[2] = (payload.overview.lastMonthData.energy / 1000).toFixed(2) + " kWh";
-            this.results[3] = (payload.overview.lastYearData.energy / 1000).toFixed(2) + " kWh";
-            this.results[4] = (payload.overview.lifeTimeData.energy / 1000000).toFixed(2) + " MWh";
+            this.results[1] = (payload.overview.data.pvetoday.val / 1000).toFixed(2) + " kWh";
+            this.results[2] = (payload.overview.data.pve.val / 1000000).toFixed(2) + " MWh";
             this.loaded = true;
             this.updateDom(1000);
         }
