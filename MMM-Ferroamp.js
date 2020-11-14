@@ -67,8 +67,8 @@ Module.register("MMM-Ferroamp",{
             } else {
                this.results[0] = currentPower + " Watt";
             }
-            this.results[1] = (payload.overview.data.pvetoday.val / 1000).toFixed(2) + " kWh";
-            this.results[2] = (payload.overview.data.pve.val / 1000000).toFixed(2) + " MWh";
+            this.results[1] = (payload.data.pvetoday.val / 1000).toFixed(2) + " kWh";
+            this.results[2] = (payload.data.pve.val / 1000000).toFixed(2) + " MWh";
             this.loaded = true;
             this.updateDom(1000);
         }
