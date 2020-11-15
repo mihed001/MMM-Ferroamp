@@ -14,7 +14,7 @@ module.exports = NodeHelper.create({
 		console.log("Notification: " + notification + " Payload: " + payload);
 
 		if (notification === "GET_FERROAMP") {
-			var ferroAmpUrl = payload.config.url + payload.config.siteId + "/overview?api_key=" + payload.config.apiKey;
+			var ferroAmpUrl = payload.config.url + "api?type=pvdisplay&api_key=" + payload.config.apiKey + "&fid=" + payload.config.siteId;
 			request(ferroAmpUrl, function (error, response, body) {
 				if (!error && response.statusCode == 200) {
 					var jsonData = JSON.parse(body);
